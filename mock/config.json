@@ -1,0 +1,130 @@
+{
+  "server": {
+    "host": "0.0.0.0",
+    "port": 8011,
+    "debug": true
+  },
+  "endpoints": [
+    {
+      "path": "/api/IdentityCheck/VerifyCardByStationStrictly",
+      "methods": ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
+      "description": "身份验证接口Mock",
+      "response": {
+        "status_code": 200,
+        "template": {
+          "Status": 0,
+          "Message": "OK",
+          "Result": {
+            "State": 0,
+            "ErrMsg": "",
+            "Data": {
+              "EmployeeName": "涂从傲",
+              "EmployeeCode": "452",
+              "DepartmentName": "开拓三队",
+              "DutyName": "其他",
+              "ProfessionName": "支护工",
+              "PositionCardID": "452",
+              "Battery": 23,
+              "LowBattery": 10,
+              "SOS": 0,
+              "LastUpdateTime": "2021/08/25 15:17:04"
+            }
+          }
+        }
+      },
+      "request_validation": {
+        "required_headers": [],
+        "required_params": [],
+        "required_body_fields": []
+      },
+      "log_request": true
+    },
+    {
+      "path": "/api/IdentityCheck/VerifyCardByStationStrictly1",
+      "methods": ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
+      "description": "身份验证接口Mock",
+      "response": {
+        "status_code": 200,
+        "template": {
+          "Status": 0,
+          "Message": "OK",
+          "Result": {
+            "State": -1004,
+            "ErrMsg": "校验失败，该卡距离分站距离过远",
+            "Data": null
+          }
+        }
+      },
+      "request_validation": {
+        "required_headers": [],
+        "required_params": [],
+        "required_body_fields": []
+      },
+      "log_request": true
+    },
+    {
+      "path": "/api/request/info",
+      "methods": ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
+      "description": "请求信息接口Mock",
+      "response": {
+        "status_code": 200,
+        "template": {
+          "status": 200,
+          "message": "Mock服务响应成功",
+          "timestamp": "{{timestamp}}",
+          "request_method": "{{request_method}}",
+          "request_headers": "{{request_headers}}",
+          "request_data": "{{request_data}}",
+          "request_args": "{{request_args}}",
+          "request_url": "{{request_url}}",
+          "request_path": "{{request_path}}",
+          "request_remote_addr": "{{request_remote_addr}}"
+        }
+      },
+      "request_validation": {
+        "required_headers": [],
+        "required_params": [],
+        "required_body_fields": []
+      },
+      "log_request": true
+    },
+    {
+      "path": "/health",
+      "methods": ["GET"],
+      "description": "健康检查接口",
+      "response": {
+        "status_code": 200,
+        "template": {
+          "status": "ok",
+          "message": "Mock服务运行正常",
+          "timestamp": "{{timestamp}}"
+        }
+      },
+      "request_validation": {},
+      "log_request": false
+    },
+    {
+      "path": "/",
+      "methods": ["GET"],
+      "description": "服务信息接口",
+      "response": {
+        "status_code": 200,
+        "template": {
+          "service": "Mock API Service",
+          "version": "1.0.0",
+          "description": "用于Mock数据的本地服务",
+          "endpoints": "{{endpoints_info}}",
+          "port": "{{server_port}}",
+          "timestamp": "{{timestamp}}"
+        }
+      },
+      "request_validation": {},
+      "log_request": false
+    }
+  ],
+  "global_settings": {
+    "enable_cors": true,
+    "default_error_status": 500,
+    "default_error_message": "服务器内部错误"
+  }
+}
