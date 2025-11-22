@@ -38,6 +38,11 @@ import time
 import random
 import string
 import json
+import os
+from dotenv import load_dotenv
+
+# 加载环境变量
+load_dotenv()
 
 def random_string(length):
     """生成指定长度的随机字符串"""
@@ -78,18 +83,33 @@ def encrypt(param):
     
     return param
 
-cookie_phone={
-    "dev":{
-        "url":"https://appwx.tyjfwy.com/api/Weixinlogin/sendCodeNoVerify",
-        "token":"ab18c2d4be67ce4c399171922d64cc29"
-    },
-    "pro":{
-        "url":"https://appwx.mkxxpt.com/api/Weixinlogin/sendCodeNoVerify",
-        "token":"e2b4af3246327adae5b859469826b82f"
+def get_config():
+    """
+    从环境变量读取配置
+    
+    Returns:
+        dict: 包含dev和pro环境配置的字典
+    """
+    return {
+        "dev": {
+            "url": os.getenv("DEV_URL", "https://your_url"),
+            "token": os.getenv("DEV_TOKEN", "")
+        },
+        "pro": {
+            "url": os.getenv("PRO_URL", "https://your_url"),
+            "token": os.getenv("PRO_TOKEN", "")
+        }
     }
-}
 
-isPRO=True
+def is_production():
+    """
+    判断是否使用生产环境
+    
+    Returns:
+        bool: True表示生产环境，False表示开发环境
+    """
+    is_pro = os.getenv("IS_PRO", "true").lower()
+    return is_pro in ("true", "1", "yes")
 
 def send_verification_code(phone):
     """
@@ -101,7 +121,9 @@ def send_verification_code(phone):
     Returns:
         API响应
     """
-    web_info=cookie_phone['pro' if isPRO else 'dev']
+    config = get_config()
+    is_pro = is_production()
+    web_info = config['pro' if is_pro else 'dev']
     url = web_info["url"]
     
     # 准备参数
