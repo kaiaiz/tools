@@ -17,8 +17,8 @@
 
 
 # 发送手机号
-# 接口：https://appwx.mkxxpt.com/api/Weixinlogin/sendCode
-# 参数：{"phone":"17835424469","nonceStr":"FEjHZ1745714700053","sign":"04C49E843160259762013FBB5FE7BF4C"}
+# 接口：https://your_url/api/sendCode
+# 参数：{"phone":"your_phone","nonceStr":"your_nonceStr","sign":"your_sign"}
 
 
 # 加密规则：(js语法)
@@ -92,11 +92,11 @@ def get_config():
     """
     return {
         "dev": {
-            "url": os.getenv("DEV_URL", "https://your_url"),
+            "url": os.getenv("DEV_URL", "https://your_dev_url"),
             "token": os.getenv("DEV_TOKEN", "")
         },
         "pro": {
-            "url": os.getenv("PRO_URL", "https://your_url"),
+            "url": os.getenv("PRO_URL", "https://your_pro_url"),
             "token": os.getenv("PRO_TOKEN", "")
         }
     }
